@@ -1,8 +1,14 @@
 # macOS App Skills
 
+[![skills.sh](https://skills.sh/b/fayazara/macos-app-skills)](https://skills.sh/fayazara/macos-app-skills)
+
 AI coding agent skills for building, shipping, and maintaining native macOS apps with SwiftUI + AppKit.
 
-These skills are designed for [OpenCode](https://opencode.ai) (or any AI coding agent that supports skills). They encode hard-won patterns for building production macOS apps -- the kind of stuff that's underdocumented, spread across WWDC sessions, and easy to get wrong.
+```bash
+npx skills add fayazara/macos-app-skills
+```
+
+These skills are designed for [OpenCode](https://opencode.ai), [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Cursor](https://cursor.sh), and any AI coding agent that supports skills. They encode hard-won patterns for building production macOS apps -- the kind of stuff that's underdocumented, spread across WWDC sessions, and easy to get wrong.
 
 ## Skills
 
