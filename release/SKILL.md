@@ -147,6 +147,60 @@ The CLI should:
 - Show a summary and ask for confirmation before proceeding
 - Create the GitHub release with the DMG attached
 
+## Release CLI Tool
+
+This repo includes a Go CLI that automates steps 4-8 (DMG creation through GitHub release) in a single command. It reads configuration from a `release.json` file in your project root.
+
+### Setup
+
+1. Create a `release.json` in your project root (see `cli/release.example.json`):
+
+```json
+{
+  "app_name": "MyApp",
+  "github_repo": "owner/myapp"
+}
+```
+
+Only `app_name` and `github_repo` are required. Everything else has sensible defaults:
+
+| Field | Default | Description |
+|-------|---------|-------------|
+| `bundle_name` | `{app_name}.app` | The .app bundle filename |
+| `dmg_name` | `{app_name}.dmg` | Output DMG filename |
+| `git_branch` | `main` | Branch to push appcast to |
+| `min_system_version` | `14.0` | Sparkle minimum macOS version |
+| `appcast_file` | `appcast.xml` | Appcast filename in repo root |
+| `derived_data_prefixes` | `["{app_name}-"]` | DerivedData prefixes to search for `sign_update` |
+
+2. Run the CLI from your project directory:
+
+```bash
+go run github.com/fayazara/macos-app-skills/release/cli@latest
+```
+
+Or clone this repo and run locally:
+
+```bash
+go run ./release/cli
+```
+
+The CLI is interactive -- it prompts for release notes and asks for confirmation before proceeding. It must be run in a terminal the user can interact with.
+
+### What the CLI Does
+
+1. Finds `release.json` by walking up from the current directory
+2. Checks that `create-dmg`, `gh`, `git`, and Sparkle's `sign_update` are available
+3. Validates the exported app in `~/Downloads/` (reads version, build, Sparkle keys from Info.plist)
+4. Warns if the build number already exists in the appcast
+5. Collects release notes interactively (one bullet per line, empty line to finish)
+6. Shows a release summary and asks for confirmation
+7. Creates the DMG via `create-dmg`
+8. Signs the DMG with Sparkle's `sign_update` (EdDSA)
+9. Updates `appcast.xml` with the new release entry
+10. Commits and pushes the appcast
+11. Creates a GitHub release with the DMG attached
+
 ## Common Issues
 
 | Problem | Solution |

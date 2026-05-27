@@ -22,9 +22,15 @@ Add [Sparkle](https://sparkle-project.org/) auto-update support to a macOS app d
 
 Includes a reference `UpdaterManager.swift` ready to drop into any project.
 
-### `release/` -- Release Pipeline
+### `release/` -- Release Pipeline + CLI Tool
 
 Release a macOS app to GitHub with DMG packaging and Sparkle appcast updates. Covers the full pipeline: version bump, archive, notarize, export, DMG creation via `create-dmg`, EdDSA signing via Sparkle's `sign_update`, appcast.xml updates, and GitHub release creation via `gh`.
+
+Includes a **Go CLI tool** (`release/cli/`) that automates the entire pipeline in a single command. Just add a `release.json` to your project root and run:
+
+```bash
+go run github.com/fayazara/macos-app-skills/release/cli@latest
+```
 
 ## Installation
 
