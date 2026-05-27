@@ -3,10 +3,17 @@
   "notGrouped": "bottom",
   "groupings": [
     {
-      "title": "Development",
-      "description": "Build and iterate on your macOS app.",
+      "title": "Fundamentals",
+      "description": "Essential patterns every macOS developer needs.",
       "skills": [
-        "macos-build",
+        "macos-patterns",
+        "macos-build"
+      ]
+    },
+    {
+      "title": "UI Components",
+      "description": "Drop-in UI patterns with reference code.",
+      "skills": [
         "macos-settings-ui",
         "macos-notch-ui"
       ]

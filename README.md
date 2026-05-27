@@ -28,6 +28,12 @@ Add [Sparkle](https://sparkle-project.org/) auto-update support to a macOS app d
 
 Includes a reference `UpdaterManager.swift` ready to drop into any project.
 
+### `macos-patterns/` -- Native Patterns for Web Developers
+
+The "how things actually work on macOS" reference. Covers menu bar apps (MenuBarExtra vs NSStatusItem vs NSPopover), activation policy (Dock icon toggling), NSPanel vs NSWindow, window levels and collection behaviors, screen geometry (frame vs visibleFrame, Y-axis flip, multi-monitor), keyboard shortcuts (3 tiers: SwiftUI, NSEvent monitors, Carbon hotkeys), file pickers, clipboard/pasteboard, drag and drop, NavigationSplitView + inspector layout, launch at login, Quick Look, NSWorkspace, ScreenCaptureKit, and UserDefaults/@AppStorage.
+
+This is the skill to load proactively on any macOS project to prevent the AI from applying web patterns that don't work.
+
 ### `notch-ui/` -- Dynamic Island / Notch Extender
 
 Create a Dynamic Island-style overlay that extends from the MacBook's hardware notch. Uses a borderless NSPanel at `CGShieldingWindowLevel` positioned flush against the top of the screen, with a custom `NotchShape` that has concave Bezier "ear" curves matching the hardware notch. Includes spring animations for the expand/collapse effect and a fallback pill mode for non-notch Macs.
@@ -79,6 +85,7 @@ Building native macOS apps with AI coding agents is great until you hit the part
 - **Release pipelines** involve 8+ manual steps that are error-prone and tedious to explain every time
 - **`xcodebuild`** invocations have enough flags and edge cases that the AI frequently gets them wrong
 - **Notch overlays** require specific NSPanel configuration, screen geometry math, and a custom shape with concave Bezier curves that no AI gets right from scratch
+- **Native patterns** like NSPanel vs NSWindow, activation policy toggling, window levels, Carbon hotkeys, pasteboard clearing, and screen geometry have no web equivalents and the AI defaults to web-like approaches that don't work
 
 These skills encode the correct patterns so the AI gets it right the first time.
 
