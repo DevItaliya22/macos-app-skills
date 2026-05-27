@@ -22,6 +22,12 @@ Add [Sparkle](https://sparkle-project.org/) auto-update support to a macOS app d
 
 Includes a reference `UpdaterManager.swift` ready to drop into any project.
 
+### `notch-ui/` -- Dynamic Island / Notch Extender
+
+Create a Dynamic Island-style overlay that extends from the MacBook's hardware notch. Uses a borderless NSPanel at `CGShieldingWindowLevel` positioned flush against the top of the screen, with a custom `NotchShape` that has concave Bezier "ear" curves matching the hardware notch. Includes spring animations for the expand/collapse effect and a fallback pill mode for non-notch Macs.
+
+Includes reference `NotchWindow.swift` (the panel) and `NotchShape.swift` (the shape).
+
 ### `release/` -- Release Pipeline + CLI Tool
 
 Release a macOS app to GitHub with DMG packaging and Sparkle appcast updates. Covers the full pipeline: version bump, archive, notarize, export, DMG creation via `create-dmg`, EdDSA signing via Sparkle's `sign_update`, appcast.xml updates, and GitHub release creation via `gh`.
@@ -40,7 +46,7 @@ Copy the skills you need into your project's `.agents/skills/` directory:
 
 ```bash
 # Copy all skills
-cp -r build settings-ui auto-update release /path/to/your/project/.agents/skills/
+cp -r build settings-ui auto-update release notch-ui /path/to/your/project/.agents/skills/
 
 # Or just the ones you need
 cp -r settings-ui /path/to/your/project/.agents/skills/
@@ -51,7 +57,7 @@ cp -r settings-ui /path/to/your/project/.agents/skills/
 Copy into your global skills directory:
 
 ```bash
-cp -r build settings-ui auto-update release ~/.config/opencode/skills/
+cp -r build settings-ui auto-update release notch-ui ~/.config/opencode/skills/
 ```
 
 ### Other AI agents
@@ -66,6 +72,7 @@ Building native macOS apps with AI coding agents is great until you hit the part
 - **Sparkle integration** has subtle timing requirements (`SPUStandardUpdaterController` must be created before `applicationDidFinishLaunching` returns) that are easy to miss
 - **Release pipelines** involve 8+ manual steps that are error-prone and tedious to explain every time
 - **`xcodebuild`** invocations have enough flags and edge cases that the AI frequently gets them wrong
+- **Notch overlays** require specific NSPanel configuration, screen geometry math, and a custom shape with concave Bezier curves that no AI gets right from scratch
 
 These skills encode the correct patterns so the AI gets it right the first time.
 
